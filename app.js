@@ -17,7 +17,8 @@ main().then(()=>{
 });
 
 app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"))
+app.set("views",path.join(__dirname,"views"));
+app.use(express.urlencoded({extended:true}));
 
 app.get("/",(req,res)=>{
     res.send("hii,I am the Root");
@@ -29,18 +30,14 @@ app.get("/listings",async(req,res)=>{
     res.render("listings/index.ejs",{allListings});
 });
 
-// app.get("/testlisting",async(req,res)=>{
-//     let sampleListing=new Listing({
-//         title:"my sweet home",
-//         description:"it is the most beautiful place",
-//         price:3000,
-//         location:"bhadrak",
-//         country:"INDIA"
-//     })
-//     await sampleListing.save();    
-//     console.log("connected to db");
-//     res.send("successful");
-// })
+//Show Route
+app.get("/listings/:id",async(req,res)=>{
+    let {id}=req.params;
+    const listing=await Listing.findById(id);
+    res.render("listings/show.ejs",{listing}); 
+})
+
+
 
 app.listen(8080,()=>{
     console.log("Server is running on port 8080");
