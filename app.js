@@ -4,6 +4,7 @@ const mongoose=require("mongoose");
 const Listing=require("./models/listing");
 const path=require("path");
 const methodOverride=require("method-override");
+const ejsMate = require("ejs-mate");
 
 const MONGO_URL='mongodb://127.0.0.1:27017/homify';
 
@@ -21,6 +22,7 @@ app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
+app.engine('ejs',ejsMate);
 
 app.get("/",(req,res)=>{
     res.send("hii,I am the Root");
@@ -71,7 +73,7 @@ app.delete("/listings/:id",async(req,res)=>{
     let deletedListing=await Listing.findByIdAndDelete(id);
     console.log(deletedListing);
     res.redirect("/listings");
-})
+}); 
 
 app.listen(8080,()=>{
     console.log("Server is running on port 8080");
