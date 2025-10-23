@@ -1,168 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homify - Create New Listing</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #4a6fa5, #2c3e50);
-            color: white;
-            padding: 30px 40px;
-            text-align: center;
-        }
-        
-        header h1 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        header p {
-            opacity: 0.9;
-            font-size: 16px;
-        }
-        
-        .form-container {
-            padding: 40px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #2c3e50;
-        }
-        
-        .input-with-icon {
-            position: relative;
-        }
-        
-        .input-with-icon i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #7f8c8d;
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 14px 15px 14px 45px;
-            border: 1px solid #e1e8ed;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #4a6fa5;
-            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
-        }
-        
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #4a6fa5, #2c3e50);
-            color: white;
-            border: none;
-            padding: 16px 30px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #3a5a8a, #1c2e40);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .preview-section {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border: 1px dashed #bdc3c7;
-        }
-        
-        .preview-section h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        
-        .preview-image {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            display: none;
-        }
-        
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .form-container {
-                padding: 25px;
-            }
-        }
-    </style>
-</head>
+<% layout("/layouts/boilerplate")%>
 <body>
     <div class="container">
         <header>
@@ -176,7 +12,7 @@
                     <label for="title">Property Title</label>
                     <div class="input-with-icon">
                         <i class="fas fa-heading"></i>
-                        <input id="title" name="listing[title]" placeholder="e.g., Beautiful 3-Bedroom Apartment with Ocean View" type="text" required>
+                        <input id="title" name="listing[title]" placeholder="Enter title" type="text" required>
                     </div>
                 </div>
                 
@@ -184,7 +20,7 @@
                     <label for="description">Description</label>
                     <div class="input-with-icon">
                         <i class="fas fa-align-left"></i>
-                        <textarea id="description" name="listing[description]" placeholder="Describe your property in detail..." required></textarea>
+                        <textarea id="description" name="listing[description]" placeholder="Describe your property " required></textarea>
                     </div>
                 </div>
                 
@@ -198,10 +34,10 @@
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="price">Price ($)</label>
+                        <label for="price">Price </label>
                         <div class="input-with-icon">
                             <i class="fas fa-tag"></i>
-                            <input id="price" name="listing[price]" placeholder="e.g., 250000" type="number" min="0" required>
+                            <input id="price" name="listing[price]" placeholder="enter price" type="number" min="0" required>
                         </div>
                     </div>
                     
@@ -209,7 +45,7 @@
                         <label for="location">Location</label>
                         <div class="input-with-icon">
                             <i class="fas fa-map-marker-alt"></i>
-                            <input id="location" name="listing[location]" placeholder="e.g., Downtown, City Center" type="text" required>
+                            <input id="location" name="listing[location]" placeholder="enter location" type="text" required>
                         </div>
                     </div>
                 </div>
@@ -218,10 +54,10 @@
                     <label for="country">Country</label>
                     <div class="input-with-icon">
                         <i class="fas fa-globe"></i>
-                        <input id="country" name="listing[country]" placeholder="e.g., United States" type="text" required>
+                        <input id="country" name="listing[country]" placeholder="enter country" type="text" required>
                     </div>
                 </div>
-                
+                <br/>
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-plus-circle"></i> Add Listing
                 </button>
@@ -232,4 +68,3 @@
     </div>
 
 </body>
-</html>
