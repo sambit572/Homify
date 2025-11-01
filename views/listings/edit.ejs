@@ -20,7 +20,7 @@
                     <label for="description">Description</label>
                     <div class="input-with-icon">
                         <i class="fas fa-align-left"></i>
-                        <textarea id="description" name="listing[description]"<%=listing.description%>></textarea>
+                        <textarea id="description" name="listing[description]"<%=listing.description%> required></textarea>
                     </div>
                 </div>
                 
@@ -28,7 +28,7 @@
                     <label for="image">Image URL</label>
                     <div class="input-with-icon">
                         <i class="fas fa-image"></i>
-                        <input id="image" name="listing[image]" value="<%=listing.image%>" type="text" >
+                        <input id="image" name="listing[image]" value="<%=listing.image%>" type="text" required>
                     </div>
                 </div>
                 
@@ -66,5 +66,5 @@
             
         </div>
     </div>
-
-</body>
+<script src="/js/script.js">
+    </script>
