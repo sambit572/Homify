@@ -1,67 +1,45 @@
 <% layout("/layouts/boilerplate")%>
-    <div class="container">
-        <header>
+    <div class="row">
+        <div class="col-8 offset-2">
             <h1>Create New Listing</h1>
             <p>Fill in the details below to add your property to Homify</p>
-        </header>
-        
-        <div class="form-container">
+            <br>
             <form method="POST" action="/listings" novalidate class="needs-validation">
-                <div class="form-group">
-                    <label for="title">Property Title</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-heading"></i>
-                        <input id="title" name="listing[title]" placeholder="Enter title" type="text" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="title" class="form-lable">Property Title</label>
+                    <input  name="listing[title]" placeholder="Enter title" type="text" required class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-lable">Description</label>
+                    <textarea  name="listing[description]" placeholder="Describe your property " required class="form-control"></textarea>
                 </div>
                 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-align-left"></i>
-                        <textarea id="description" name="listing[description]" placeholder="Describe your property " required></textarea>
-                    </div>
+                <div class="mb-3">
+                    <label for="image" class="form-lable">Image URL</label>
+                    <input  name="listing[image]" placeholder="enter image here" type="text" class="form-control">
                 </div>
                 
-                <div class="form-group">
-                    <label for="image">Image URL</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-image"></i>
-                        <input id="image" name="listing[image]" placeholder="enter image here" type="text" >
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-lable">Price </label>
+                        <input  name="listing[price]" placeholder="enter price" type="number" min="0" required class="form-control">
+                    </div>  
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-lable">Country</label>
+                        <input  name="listing[country]" placeholder="enter country" type="text" required class="form-control"> 
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-lable">Location</label>
+                    <input  name="listing[location]" placeholder="enter location" type="text" required class="form-control">    
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="price">Price </label>
-                        <div class="input-with-icon">
-                            <i class="fas fa-tag"></i>
-                            <input id="price" name="listing[price]" placeholder="enter price" type="number" min="0" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <div class="input-with-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <input id="location" name="listing[location]" placeholder="enter location" type="text" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-globe"></i>
-                        <input id="country" name="listing[country]" placeholder="enter country" type="text" required>
-                    </div>
-                </div>
-                <br/>
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-plus-circle"></i> Add Listing
+                <br>
+                <button class="btn btn-dark">
+                     Add Listing
                 </button>
-            </form>        
+            </form>
+            <br>        
         </div>
     </div>
-<script src="/js/script.js">
-    </script>

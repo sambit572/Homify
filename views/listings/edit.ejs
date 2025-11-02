@@ -1,70 +1,47 @@
 <% layout("/layouts/boilerplate")%>
-<body>
-    <div class="container">
-        <header>
+    <div class="row">
+        <div class="col-8 offset-2">
             <h1>Edit New Listing</h1>
             <p>Update  your property in Homify</p>
-        </header>
         
-        <div class="form-container">
             <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
-                <div class="form-group">
-                    <label for="title">Property Title</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-heading"></i>
-                        <input id="title" name="listing[title]" value="<%=listing.title%>" type="text" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="title" class="form-lable">Property Title</label>
+                    <input id="title" name="listing[title]" value="<%=listing.title%>" type="text" required class="form-control">    
                 </div>
                 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-align-left"></i>
-                        <textarea id="description" name="listing[description]"<%=listing.description%> required></textarea>
-                    </div>
+                <div class="mb-3">
+                    <label for="description" class="form-lable">Description</label>
+                    <textarea id="description" name="listing[description]"<%=listing.description%> required class="form-control"></textarea>
                 </div>
                 
-                <div class="form-group">
-                    <label for="image">Image URL</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-image"></i>
-                        <input id="image" name="listing[image]" value="<%=listing.image%>" type="text" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="image" class="form-lable">Image URL</label>
+                    <input id="image" name="listing[image]" value="<%=listing.image%>" type="text" required class="form-control">
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="price">Price ($)</label>
-                        <div class="input-with-icon">
-                            <i class="fas fa-tag"></i>
-                            <input id="price" name="listing[price]" value="<%=listing.price%>" type="number" min="0" required>
-                        </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-lable">Price ($)</label>
+                        <input id="price" name="listing[price]" value="<%=listing.price%>" type="number" min="0" required class="form-control">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <div class="input-with-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <input id="location" name="listing[location]" value="<%=listing.location%>" type="text" required>
-                        </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="location" class="form-lable">Location</label>
+                        <input id="location" name="listing[location]" value="<%=listing.location%>" type="text" required class="form-control">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="country">Country</label>
-                    <div class="input-with-icon">
-                        <i class="fas fa-globe"></i>
-                        <input id="country" name="listing[country]" value="<%=listing.country%>" type="text" required>
-                    </div>
+                    <label for="country" class="form-lable">Country</label>
+                    <input id="country" name="listing[country]" value="<%=listing.country%>" type="text" required class="form-control">
                 </div>
                 
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-plus-circle"></i> Edit Listing
+                <button  class="btn btn-dark">
+                    Edit Listing
                 </button>
             </form>
-            
-            
         </div>
-    </div>
-<script src="/js/script.js">
-    </script>
+    </div>        
+            
+        
