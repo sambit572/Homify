@@ -51,9 +51,12 @@ app.get("/listings/:id",wrapAsync(async(req,res)=>{
 
 //Create Route
 app.post("/listings",wrapAsync(async(req,res,next)=>{
-        const newListing=new Listing(req.body.listing);
-        await newListing.save();
-        res.redirect("/listings");
+    if(!req.body.listing){
+        throw new ExpressError(400,"Invalid Listing Data");
+    }   
+    const newListing=new Listing(req.body.listing);   
+    await newListing.save();
+    res.redirect("/listings");
 }));
 
 //Edit Route
@@ -80,11 +83,11 @@ app.delete("/listings/:id",wrapAsync(async(req,res)=>{
 
 app.all(/.*/,(req,res,next)=>{
     next(new ExpressError(404, "Page Not Found!"));
-});
+}); 
 
 app.use((err,req,res,next)=>{
     let {statusCode=500,message="Something Went Wrong"}=err;
-    res.status(statusCode).send(message);
+    res.status(statusCode).render("error.ejs",{err});
 });
 
 app.listen(8080,()=>{
