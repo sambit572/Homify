@@ -21,4 +21,45 @@
                 <button class="btn btn-dark offset-11">Delete </button>
             </form>
         </div>
+        <div class="col-md-8 offset-md-2 mb-4 mt-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h4 class="mb-4">Leave a Review</h4>
+
+                    <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate class="needs-validation">
+                        <!-- Rating -->
+                        <div class="mb-4">
+                            <label for="rating" class="form-label fw-semibold">Rating</label>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="text-muted small">1</span>
+                                <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range flex-grow-1">
+                                <span class="text-muted small">5</span>
+                            </div>
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-4">
+                            <label for="comment" class="form-label fw-semibold">Comment</label>
+                            <textarea name="review[comment]" id="comment" class="form-control border-2" rows="5" placeholder="Write your experience..." required></textarea>
+                            <div class="invalid-feedback">Place a valid Review</div>
+                        </div>
+
+                        <button class="btn btn-danger w-100 py-2 fs-5">
+                            Submit Review ✨
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <hr/>
+            <h4>All Reviews</h4>
+            <ul>
+            <% for(review of listing.reviews) { %>
+                <div class="mb-3">
+                    <li> <%= review.rating %>stars</li>
+                    <li> <%= review.comment %></li>
+                </div>
+            <% } %>
+            </ul>
+        </div>
+
     </div>
