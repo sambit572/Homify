@@ -51,15 +51,19 @@
                 </div>
             </div>
             <hr/>
-            <h4>All Reviews</h4>
-            <ul>
+            <p><b>All Reviews</b></p>
+            <div class="row">
             <% for(review of listing.reviews) { %>
-                <div class="mb-3">
-                    <li> <%= review.rating %>stars</li>
-                    <li> <%= review.comment %></li>
+                <div class="card col-5 ms-3 mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Sambit</h5>
+                        <p class="card-text"><%= review.comment %></p>
+                        <p class="card-text"><%= review.rating %> stars</p>
+                    </div>
                 </div>
             <% } %>
-            </ul>
+            </div>
+            
         </div>
 
     </div>
