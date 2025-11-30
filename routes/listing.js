@@ -26,16 +26,19 @@ router.get("/new",(req,res)=>{
     res.render("listings/new.ejs");
 });
 
-//Show Route
+// Show Route
 router.get("/:id",wrapAsync(async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id).populate("reviews");
+
     if(!listing){
         req.flash("error","Cannot find that listing!");
-        res.redirect("/listings");
+        return res.redirect("/listings");  
     }
+
     res.render("listings/show.ejs",{listing}); 
 }));
+
 
 //Create Route
 router.post("/",validateListing,wrapAsync(async(req,res,next)=>{
