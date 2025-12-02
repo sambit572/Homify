@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 const sessionOptions = {
     secret:"mysupersecretcode",
     resave:false,
-    saveUninitialized:true,
+    saveUninitialized:false,
     cookie:{
         expires:Date.now()+1000*60*60*24*7,
         maxAge:1000*60*60*24*7,
@@ -65,14 +65,14 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.get("/demo",async(req,res)=>{
-    let fakeUser=new User({
-        email:"sambit@gmail.com",
-        username:"sambit"
-    });
-    let newUser=await User.register(fakeUser,"hello123");
-    res.send(newUser);
-});
+// app.get("/demo",async(req,res)=>{
+//     let fakeUser=new User({
+//         email:"sambit@gmail.com",
+//         username:"sambit"
+//     });
+//     let newUser=await User.register(fakeUser,"hello123");
+//     res.send(newUser);
+// });
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
