@@ -27,9 +27,13 @@ router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
 
-router.post("/login",passport.authenticate("local", {failureRedirect:'/login',failureFlash:true}),async(req, res) => {
-    req.flash("success","Welcome to Homify! You are logged in.");
+router.post(
+  "/login",
+  passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),
+  (req, res) => {
+    console.log("🔥 LOGIN SUCCESS — redirecting...");
     res.redirect("/listings");
-});
+  }
+);
 
 module.exports = router;
