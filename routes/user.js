@@ -13,7 +13,6 @@ router.post("/signup", wrapAsync(async (req, res, next) => {
         let { username, email, password } = req.body;
         const newUser = new User({ username, email });
         const registeredUser = await User.register(newUser, password);
-
         console.log(registeredUser);
         req.flash("success", "Welcome to Homify!");
         res.redirect("/listings");
@@ -27,17 +26,9 @@ router.post("/signup", wrapAsync(async (req, res, next) => {
 router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
-
-router.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),
-  (req, res) => {
-    console.log("AUTHENTICATED:", req.isAuthenticated());
-    console.log("USER:", req.user);
-    res.redirect("/listings");
-  }
-);
-
+router.post("/login", passport.authenticate("local", {failureRedirect:'/login', failureFlash: true}), async(req,res) => {
+  res.send("Logged In Successfully");
+});
 
 
 module.exports = router;
