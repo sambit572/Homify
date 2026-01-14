@@ -27,7 +27,7 @@ router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
 router.post("/login", passport.authenticate("local", {failureRedirect:'/login', failureFlash: true}), async(req,res) => {
-  res.send("Logged In Successfully");
+  res.flash("success","Logged In Successfully");
 });
 
 
