@@ -36,7 +36,7 @@ router.post("/login",saveRedirectUrl, passport.authenticate("local", {failureRed
   res.flash("success","Logged In Successfully");
   let redirectUrl = res.locals.redirectUrl|| '/listings';
   req.redirect(redirectUrl);
-});
+});      
 
 router.get("/logout",(req,res,next)=>{
     req.logout((err)=>{
