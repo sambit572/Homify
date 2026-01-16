@@ -14,9 +14,13 @@ router.post("/signup", wrapAsync(async (req, res, next) => {
         const newUser = new User({ username, email });
         const registeredUser = await User.register(newUser, password);
         console.log(registeredUser);
-        req.flash("success", "Welcome to Homify!");
-        res.redirect("/listings");
-
+        req.login(registeredUser,(err)=>{
+            if(err){
+                return next(err);
+            }
+            req.flash("success", "Welcome to Homify!");
+            res.redirect("/listings");
+            })
     } catch (e) {
         req.flash("error", e.message);
         res.redirect("/signup");
@@ -26,8 +30,20 @@ router.post("/signup", wrapAsync(async (req, res, next) => {
 router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
+
 router.post("/login", passport.authenticate("local", {failureRedirect:'/login', failureFlash: true}), async(req,res) => {
-  res.send("Logged In Successfully");
+  res.flash("success","Logged In Successfully");
+});
+
+router.get("/logout",(req,res,next)=>{
+    req.logout((err)=>{
+        if(err){
+            return next(err);
+        }
+        console.log(req.user);
+        req.flash("success","Logged Out Successfully");
+        res.redirect("/listings");
+    })
 });
 
 
