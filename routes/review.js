@@ -5,27 +5,12 @@ const ExpressError=require("../utils/ExpressError.js");
 const Review=require("../models/review");
 const Listing=require("../models/listing");
 const {validateReview,isReviewAuthor}=require("../middleware.js");
+const reviewController=require("../controllers/reviews.js");
 
 //Review Route
-router.post("/",validateReview,wrapAsync(async(req,res)=>{
-    console.log(req.params.id);
-    let listing=await Listing.findById(req.params.id);
-    let newReview=new Review(req.body.review);
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-    req.flash("success","Successfully added a new review!");
-    res.redirect(`/listings/${listing._id}`);
-}));
+router.post("/",validateReview,wrapAsync(reviewController.createReview));
 
 //Delete Review Route
-router.delete("/:reviewId",wrapAsync(async(req,res)=>{
-    let {id,reviewId}=req.params;
-    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
-    await Review.findByIdAndDelete(reviewId);
-    console.log("Review Deleted");
-    req.flash("success","Successfully deleted the review!");
-    res.redirect(`/listings/${id}`);
-}));
+router.delete("/:reviewId",wrapAsync(reviewController.deleteReview));
 
 module.exports = router;
