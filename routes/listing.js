@@ -1,26 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const wrapAsync=require("../utils/wrapAsync.js");
-const ExpressError=require("../utils/ExpressError.js");
-const { listingSchema } = require("../schema.js");
 const Listing=require("../models/listing");
-const { isLoggedIn } = require("../middleware.js");
-
-const validateListing=(req,res,next)=>{
-    let {error}=listingSchema.validate(req.body); 
-    if(error){   
-        let errMsg=error.details.map((el)=>el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();   
-    }
-};
+const { isLoggedIn,validateListing } = require("../middleware.js");
 
 //Index Route
 router.get("/",wrapAsync(async(req,res)=>{
     const allListings=await Listing.find({});
     res.render("listings/index.ejs",{allListings});
-}));
+}));  
 
 //new route
 router.get("/new",(req,res)=>{
@@ -30,7 +18,7 @@ router.get("/new",(req,res)=>{
 // Show Route
 router.get("/:id",wrapAsync(async(req,res)=>{
     let {id}=req.params;
-    const listing=await Listing.findById(id).populate("reviews").populate("owner");
+    const listing=await Listing.findById(id).populate({path:"reviews",populate:{path:"author"},}).populate("owner");
     if(!listing){
         req.flash("error","Cannot find that listing!");
         return res.redirect("/listings");  
@@ -38,7 +26,6 @@ router.get("/:id",wrapAsync(async(req,res)=>{
     console.log(listing);
     res.render("listings/show.ejs",{listing}); 
 }));
-
 
 //Create Route
 router.post("/",validateListing,wrapAsync(async(req,res,next)=>{
