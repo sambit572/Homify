@@ -4,7 +4,7 @@
             <h1>Edit New Listing</h1>
             <p>Update  your property in Homify</p>
         
-            <form method="post" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation">
+            <form method="post" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-lable">Property Title</label>
                     <input id="title" name="listing[title]" value="<%=listing.title%>" type="text"  class="form-control" required> 
@@ -16,11 +16,14 @@
                     <textarea id="description" name="listing[description]"<%=listing.description%>  class="form-control" required></textarea>
                     <div class="invalid-feedback">Please Enter Description</div>
                 </div>
+
+                <div class="mb-3">
+                    <img src="<%=originalImageUrl%>"/>
+                </div>
                 
                 <div class="mb-3">
-                    <label for="image" class="form-lable">Image URL</label>
-                    <input id="image" name="listing[image]" value="<%=listing.image%>" type="text"  class="form-control" required>
-                    <div class="invalid-feedback">Please Enter a valid Image</div>
+                    <label for="image" class="form-lable">Upload New Image</label>
+                    <input id="image" name="listing[image]"  type="file"  class="form-control" required>
                 </div>
                 
                 <div class="row">

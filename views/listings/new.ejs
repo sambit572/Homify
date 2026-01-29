@@ -4,7 +4,7 @@
             <h1>Create New Listing</h1>
             <p>Fill in the details below to add your property to Homify</p>
             <br>
-            <form method="POST" action="/listings" novalidate class="needs-validation">
+            <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-lable">Property Title</label>
                     <input  name="listing[title]" placeholder="Enter title" type="text"  class="form-control" required>
@@ -18,8 +18,9 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="image" class="form-lable">Image URL</label>
-                    <input  name="listing[image]" placeholder="enter image here" type="text" class="form-control">
+                    <label for="image" class="form-lable">Upload Image</label>
+                    <input  name="listing[image]"  type="file" class="form-control">
+                    required
                 </div>
                 
                 <div class="row">

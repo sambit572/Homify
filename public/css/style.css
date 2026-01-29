@@ -497,3 +497,90 @@ form .btn:hover {
     margin-left: 33.333333%;
 }
 
+#filters{
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 1rem 0;
+    }
+    .filter{
+        flex: 0 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 2rem;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .filter:hover{
+        background-color: #007bff;
+        color: white;
+    }
+    
+.tax-info {
+    display: none;
+}
+
+.tax-toggle {
+    margin-left: auto;
+    padding: 0.6rem 1.2rem;
+
+    border-radius: 999px;
+    background-color: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* IMPORTANT: fix bootstrap reverse layout */
+.tax-toggle .form-check-reverse {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0; /* remove bootstrap margin */
+}
+
+/* label must NOT block clicks */
+.tax-toggle .form-check-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ensure switch is clickable */
+.tax-toggle .form-check-input {
+    width: 2.4em;
+    height: 1.3em;
+
+    cursor: pointer;
+    margin: 0;
+
+    pointer-events: auto; /* CRITICAL */
+}
+
+/* ON state */
+.tax-toggle .form-check-input:checked {
+    background-color: #ff385c;
+    border-color: #ff385c;
+}
+
+/* focus ring */
+.tax-toggle .form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.35);
+}
+
+.btn-search i{
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.search-input{
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem; 
+}
