@@ -1,5 +1,11 @@
 const Listing=require("../models/listing");
 
+
+const maptilerSdk = require("@maptiler/client");
+
+
+maptilerSdk.config.apiKey = process.env.MAPTILER_KEY;
+
 module.exports.index=async(req,res)=>{
     const allListings=await Listing.find({});
     res.render("listings/index.ejs",{allListings});

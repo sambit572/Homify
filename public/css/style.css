@@ -584,3 +584,8 @@ form .btn:hover {
     border-radius: 25px;
     padding: 0 1rem 0 1rem; 
 }
+
+#map {
+    width: 100%;
+    height: 400px;
+}
