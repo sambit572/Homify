@@ -10,9 +10,18 @@
                     <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing_img"> 
                         <div class="card-body">
                                 <p class="card-text"><%=listing.description %></p>
-                                <p class="card-text"><%=listing.price.toLocaleString("en-IN")%></p>
-                                <p class="card-text"><%=listing.location %></p>
-                                <p class="card-text"><%=listing.country %></p>
+                                <p class="card-text">&#8377;<%=listing.price.toLocaleString("en-IN")%>/night</p>
+                                <p class="card-text"><%=listing.location %>, <%=listing.country %></p>
+                                <% if(listing.tags && listing.tags.length > 0) { %>
+                                <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:7px;">
+                                    <% listing.tags.forEach(tag => { %>
+                                        <a href="/listings?tags=<%= tag %>" style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:500;background:#fff3f4;color:#c0392b;border:1px solid #fcc;text-decoration:none;transition:all 0.15s;" onmouseover="this.style.background='#fe424d';this.style.color='#fff'" onmouseout="this.style.background='#fff3f4';this.style.color='#c0392b'">
+                                            <i class="<%= TAG_META[tag] ? TAG_META[tag].icon : 'fa-solid fa-tag' %>" style="font-size:0.75rem;"></i>
+                                            <%= TAG_META[tag] ? TAG_META[tag].label : tag %>
+                                        </a>
+                                    <% }); %>
+                                </div>
+                                <% } %>
                         </div>
                 </div>
         <br/>

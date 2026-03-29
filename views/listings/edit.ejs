@@ -1,57 +1,145 @@
 <% layout("/layouts/boilerplate")%>
     <div class="row">
         <div class="col-8 offset-2">
-            <h1>Edit New Listing</h1>
-            <p>Update  your property in Homify</p>
+            <h1>Edit Listing</h1>
+            <p>Update your property in Homify</p>
         
             <form method="post" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-lable">Property Title</label>
-                    <input id="title" name="listing[title]" value="<%=listing.title%>" type="text"  class="form-control" required> 
+                    <input id="title" name="listing[title]" value="<%=listing.title%>" type="text" class="form-control" required> 
                     <div class="valid-feedback">Title Looks Good</div>   
                 </div>
                 
                 <div class="mb-3">
                     <label for="description" class="form-lable">Description</label>
-                    <textarea id="description" name="listing[description]"<%=listing.description%>  class="form-control" required></textarea>
+                    <textarea id="description" name="listing[description]" class="form-control" required><%= listing.description %></textarea>
                     <div class="invalid-feedback">Please Enter Description</div>
                 </div>
 
                 <div class="mb-3">
-                    <img src="<%=originalImageUrl%>"/>
+                    <img src="<%=originalImageUrl%>" style="border-radius:8px;max-width:100%;"/>
                 </div>
                 
                 <div class="mb-3">
                     <label for="image" class="form-lable">Upload New Image</label>
-                    <input id="image" name="listing[image]"  type="file"  class="form-control" required>
+                    <input id="image" name="listing[image]" type="file" class="form-control">
                 </div>
                 
                 <div class="row">
                     <div class="mb-3 col-md-4">
-                        <label for="price" class="form-lable">Price ($)</label>
-                        <input id="price" name="listing[price]" value="<%=listing.price%>" type="number" min="0"  class="form-control" required>
+                        <label for="price" class="form-lable">Price (₹)</label>
+                        <input id="price" name="listing[price]" value="<%=listing.price%>" type="number" min="0" class="form-control" required>
                         <div class="invalid-feedback">Enter Price as Number</div>
                     </div>
                     
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-lable">Location</label>
-                        <input id="location" name="listing[location]" value="<%=listing.location%>" type="text"  class="form-control" required>
-                        <div class="invalid-feedback">Please Enter Your Country Name</div>
+                        <input id="location" name="listing[location]" value="<%=listing.location%>" type="text" class="form-control" required>
+                        <div class="invalid-feedback">Please Enter Location</div>
                     </div>
                 </div>
                 
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="country" class="form-lable">Country</label>
-                    <input id="country" name="listing[country]" value="<%=listing.country%>" type="text"  class="form-control" required>
-                    <div class="invalid-feedback">Please Enter Location</div>
+                    <input id="country" name="listing[country]" value="<%=listing.country%>" type="text" class="form-control" required>
+                    <div class="invalid-feedback">Please Enter Country</div>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label class="form-lable">Lifestyle Tags</label>
+                    <p class="tag-hint">Select all that apply.</p>
+                    <%
+                    const groups = {};
+                    VALID_TAGS.forEach(tag => {
+                        const g = TAG_META[tag].group;
+                        if(!groups[g]) groups[g] = [];
+                        groups[g].push(tag);
+                    });
+                    %>
+                    <% Object.keys(groups).forEach(group => { %>
+                        <p class="tag-group-label"><%= group %></p>
+                        <div class="tag-chip-row">
+                            <% groups[group].forEach(tag => { %>
+                                <% const isChecked = listing.tags && listing.tags.includes(tag); %>
+                                <label class="tag-picker-label <%= isChecked ? 'tag-active' : '' %>">
+                                    <input type="checkbox" name="tags" value="<%= tag %>" class="tag-picker-check" <%= isChecked ? 'checked' : '' %>>
+                                    <i class="<%= TAG_META[tag].icon %>"></i>
+                                    <%= TAG_META[tag].label %>
+                                </label>
+                            <% }); %>
+                        </div>
+                    <% }); %>
                 </div>
                 
-                <button  class="btn btn-dark">
-                    Edit Listing
-                </button>
+                <button class="btn btn-dark">Edit Listing</button>
             </form>
         </div>
-    </div> 
-           
-            
-        
+    </div>
+
+<style>
+.tag-hint {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+.tag-group-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #999;
+    margin: 12px 0 6px;
+}
+.tag-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+.tag-picker-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: all 0.15s;
+    user-select: none;
+    background: #fff;
+    color: #444;
+}
+.tag-picker-label i {
+    font-size: 0.8rem;
+}
+.tag-picker-label input[type="checkbox"] {
+    display: none;
+}
+.tag-picker-label:hover {
+    border-color: #fe424d;
+    color: #fe424d;
+}
+.tag-picker-label.tag-active {
+    background: #fe424d;
+    color: #fff;
+    border-color: #fe424d;
+}
+</style>
+
+<script>
+document.querySelectorAll('.tag-picker-label').forEach(label => {
+    label.addEventListener('click', () => {
+        const cb = label.querySelector('.tag-picker-check');
+        setTimeout(() => {
+            if (cb.checked) {
+                label.classList.add('tag-active');
+            } else {
+                label.classList.remove('tag-active');
+            }
+        }, 0);
+    });
+});
+</script>
