@@ -41,6 +41,31 @@
                     <div class="invalid-feedback">Please Enter Location</div>    
                 </div>
                 
+                <div class="mb-3">
+                    <label class="form-lable">Lifestyle Tags</label>
+                    <p style="font-size:0.85rem;color:#888;margin-bottom:10px;">Select all that apply — guests will use these to filter listings.</p>
+                    <%
+                    const groups = {};
+                    VALID_TAGS.forEach(tag => {
+                        const g = TAG_META[tag].group;
+                        if(!groups[g]) groups[g] = [];
+                        groups[g].push(tag);
+                    });
+                    %>
+                    <% Object.keys(groups).forEach(group => { %>
+                        <p style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:#999;margin:12px 0 6px;"><%= group %></p>
+                        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px;">
+                            <% groups[group].forEach(tag => { %>
+                                <label style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid #ddd;cursor:pointer;font-size:0.82rem;font-weight:500;transition:all 0.15s;user-select:none;" class="tag-picker-label">
+                                    <input type="checkbox" name="tags" value="<%= tag %>" style="display:none;" class="tag-picker-check">
+                                    <i class="<%= TAG_META[tag].icon %>" style="font-size:0.8rem;"></i>
+                                    <%= TAG_META[tag].label %>
+                                </label>
+                            <% }); %>
+                        </div>
+                    <% }); %>
+                </div>
+                
                 <br>
                 <button class="btn btn-dark">
                      Add Listing
@@ -49,3 +74,21 @@
             <br>        
         </div>
     </div>
+<script>
+document.querySelectorAll('.tag-picker-label').forEach(label => {
+    const cb = label.querySelector('.tag-picker-check');
+    label.addEventListener('click', () => {
+        setTimeout(() => {
+            if(cb.checked) {
+                label.style.background = '#fe424d';
+                label.style.color = '#fff';
+                label.style.borderColor = '#fe424d';
+            } else {
+                label.style.background = '';
+                label.style.color = '';
+                label.style.borderColor = '#ddd';
+            }
+        }, 0);
+    });
+});
+</script>
